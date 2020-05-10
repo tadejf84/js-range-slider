@@ -4,7 +4,7 @@ This slider is built with vanilla JS. It's reusable, customizable and easy to us
 
 ## How to use
 
-1. Define an option object with the name of your choice. 
+1. Define an option object. 
 
 ```javascript
 let exampleOptions = {
