@@ -4,45 +4,23 @@ This slider is built with vanilla JS. It's reusable, customizable and easy to us
 
 # How to use
 
-### HTML Markup
-
-You need three containers:
-
-1. Slider Container (SVG with height and width, any ID or class)
-2. Display Values Container - Legend (ul element, any ID or class)
-3. Error Message (ul or ol with id="errorMsg", must use this ID!)
-
-Example:
-
-```
-<div id="mainContainer">
-  <ul id="displayValues">
-    <h2>Legend</h2>
-  </ul>
-  <div id="sliderCont">
-    <svg xmlns="http://www.w3.org/2000/svg" height="400" width="400" id="sliderSvg">
-    </svg>
-  </div>
-</div>
-<ol id="errorMsg"></ol>
-```
-
-### JS
-
-1. Define an option object with the name of your choice. All the options have to be entered
-(no null, undefined) and they have to be of the correct data type!
+1. Define an option object with the name of your choice. 
 
 ```javascript
 let exampleOptions = {
-    selector: string,
-    radius: number,
-    min: number,
-    max: number,
-    step: number,
-    startValue: number,
-    color: string,
-    displayContainer: string,
-    displayName: string
+    DOMselector: string,
+    sliders: [
+      {
+        radius: number,
+        min: number,
+        max: number,
+        step: number,
+        startValue: number,
+        color: string,
+        displayContainer: string,
+        displayName: string
+      }
+    ]
 };
 ```
 

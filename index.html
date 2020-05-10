@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>JS Round Range Slider</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+    <h1>JS Round Range Slider</h1>
+
+    <!-- slider container -->
+    <div id="app"></div>
+
+    <script type="text/javascript" src="app.js"></script>
+
+    <script>
+        const opts = {
+            DOMselector: '#app',
+            sliders: [
+                {
+                    radius: 100,
+                    min: 0,
+                    max: 100,
+                    step: 10,
+                    initialValue: 50,
+                    color: '#fdcb6e',
+                    displayName: 'Value 1'
+                },
+                {
+                    radius: 160,
+                    min: 0,
+                    max: 300,
+                    step: 10,
+                    initialValue: 200,
+                    color: '#0984e3',
+                    displayName: 'Value 2'
+                },
+                {
+                    radius: 40,
+                    min: 0,
+                    max: 200,
+                    step: 10,
+                    initialValue: 20,
+                    color: '#d63031',
+                    displayName: 'Value 3'
+                }
+            ]
+        };
+
+
+        const slider = new Slider(opts);
+        slider.draw();
+    </script>
+</body>
+
+</html>
