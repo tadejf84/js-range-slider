@@ -25,8 +25,8 @@ const exampleOptions = {
 
 Additional explanation:
 
-* selector -> your container selector (i.e. #yourSelector, can be class or id)
-* sliders -> array of objects for slider settings radius
+* selector -> your container selector (i.e. #yourSelector, can be any valid selector)
+* sliders -> array of options objects for sliders
 * radius -> radius of the slider (i.e. 100)
 * min -> minimum value of the slider (i.e. 100)
 * max -> maximum value of the slider (i.e. 100)
