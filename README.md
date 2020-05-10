@@ -38,7 +38,7 @@ Additional explanation:
 2. Make a new instance of the Slider Class and call the draw() method
 
 ```javascript
-let slider = new Slider(exampleOptions);
+const slider = new Slider(exampleOptions);
 slider.draw();
 ```
 
