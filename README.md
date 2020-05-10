@@ -7,7 +7,7 @@ This slider is built with vanilla JS. It's reusable, customizable and easy to us
 1. Define an option object. 
 
 ```javascript
-let exampleOptions = {
+const exampleOptions = {
     DOMselector: string,
     sliders: [
       {
