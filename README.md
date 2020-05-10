@@ -1,4 +1,4 @@
-# Concentric Circular Range Slider with JS and SVG
+# Concentric Circular Range Slider with JS
 
 This slider is built with vanilla JS. It's reusable, customizable and easy to use.
 
