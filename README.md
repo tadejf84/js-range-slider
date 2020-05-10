@@ -2,7 +2,7 @@
 
 This slider is built with vanilla JS. It's reusable, customizable and easy to use.
 
-# How to use
+## How to use
 
 1. Define an option object with the name of your choice. 
 
