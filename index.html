@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>JS Round Range Slider</title>
+    <title>JS Round Range Slider App</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,600" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app.css">
 </head>
@@ -14,7 +14,7 @@
 <body>
 
     <div class="container">
-        <h1>JS Round Range Slider</h1>
+        <h1>JS Round Range Slider App</h1>
 
         <!-- slider app container -->
         <div id="app"></div>
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="app.js"></script>
 
     <script>
-        // slider options
+        // slider app options
         const opts = {
             DOMselector: '#app',
             sliders: [
@@ -39,8 +39,8 @@
                 {
                     radius: 160,
                     min: 0,
-                    max: 300,
-                    step: 10,
+                    max: 3000,
+                    step: 100,
                     initialValue: 200,
                     color: '#0984e3',
                     displayName: 'Value 2'
@@ -57,7 +57,7 @@
             ]
         };
 
-        // instantiate slider
+        // instantiate the slider
         const slider = new Slider(opts);
         slider.draw();
     </script>
