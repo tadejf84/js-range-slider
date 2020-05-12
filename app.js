@@ -40,7 +40,7 @@ class Slider {
         this.container.appendChild(svgContainer);
 
         // Draw sliders
-        this.sliders.forEach( (slider, index) => this.drawSingleSliderOnInit(svg, slider, index) );
+        this.sliders.forEach((slider, index) => this.drawSingleSliderOnInit(svg, slider, index));
 
         // Event listeners
         svgContainer.addEventListener('mousedown', this.mouseTouchStart.bind(this), false);
@@ -60,6 +60,14 @@ class Slider {
      * @param {number} index 
      */
     drawSingleSliderOnInit(svg, slider, index) {
+
+        // Default slider opts, if none are set
+        slider.radius = slider.radius ?? 50;
+        slider.min = slider.min ?? 0;
+        slider.max = slider.max ?? 1000;
+        slider.step = slider.step ?? 50;
+        slider.initialValue = slider.initialValue ?? 0;
+        slider.color = slider.color ?? '#FF5733';
 
         // Calculate slider circumference
         const circumference = slider.radius * this.tau;
@@ -161,13 +169,13 @@ class Slider {
             const li = document.createElement('li');
             li.setAttribute('data-slider', index);
             const firstSpan = document.createElement('span');
-            firstSpan.innerText = slider.initialValue;
+            firstSpan.innerText = slider.initialValue ?? 0;
             firstSpan.classList.add('sliderValue');
             const secondSpan = document.createElement('span');
-            secondSpan.style.backgroundColor = slider.color;
+            secondSpan.style.backgroundColor = slider.color ?? '#FF5733';
             secondSpan.classList.add('colorSquare');
             const thirdSpan = document.createElement('span');
-            thirdSpan.innerText = slider.displayName;
+            thirdSpan.innerText = slider.displayName ?? 'Unnamed value';
             li.appendChild(firstSpan);
             li.appendChild(secondSpan);
             li.appendChild(thirdSpan);
