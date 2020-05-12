@@ -169,13 +169,13 @@ class Slider {
             const li = document.createElement('li');
             li.setAttribute('data-slider', index);
             const firstSpan = document.createElement('span');
-            firstSpan.innerText = slider.initialValue ?? 0;
-            firstSpan.classList.add('sliderValue');
+            firstSpan.style.backgroundColor = slider.color ?? '#FF5733';
+            firstSpan.classList.add('colorSquare');
             const secondSpan = document.createElement('span');
-            secondSpan.style.backgroundColor = slider.color ?? '#FF5733';
-            secondSpan.classList.add('colorSquare');
+            secondSpan.innerText = slider.displayName ?? 'Unnamed value';
             const thirdSpan = document.createElement('span');
-            thirdSpan.innerText = slider.displayName ?? 'Unnamed value';
+            thirdSpan.innerText = slider.initialValue ?? 0;
+            thirdSpan.classList.add('sliderValue');
             li.appendChild(firstSpan);
             li.appendChild(secondSpan);
             li.appendChild(thirdSpan);
