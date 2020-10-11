@@ -1,5 +1,11 @@
 class Slider {
 
+    /**
+     * @constructor
+     * 
+     * @param {string} DOM selector
+     * @param {array} sliders
+     */
     constructor({ DOMselector, sliders }) {
         this.DOMselector = DOMselector;
         this.container = document.querySelector(this.DOMselector);  // Slider container
@@ -19,7 +25,6 @@ class Slider {
         this.mouseDown = false;                                     // Is mouse down
         this.activeSlider = null;                                   // Stores active (selected) slider
     }
-
 
     /**
      * Draw sliders on init
@@ -50,7 +55,6 @@ class Slider {
         window.addEventListener('mouseup', this.mouseTouchEnd.bind(this), false);
         window.addEventListener('touchend', this.mouseTouchEnd.bind(this), false);
     }
-
 
     /**
      * Draw single slider on init
@@ -96,7 +100,6 @@ class Slider {
         this.drawHandle(slider, initialAngle, sliderGroup);
     }
 
-
     /**
      * Output arch path
      * 
@@ -123,7 +126,6 @@ class Slider {
         group.appendChild(path);
     }
 
-
     /**
      * Draw handle for single slider
      * 
@@ -147,7 +149,6 @@ class Slider {
         handle.style.fill = this.handleFillColor;
         group.appendChild(handle);
     }
-
 
     /**
      * Create legend UI on init
@@ -186,7 +187,6 @@ class Slider {
         this.container.appendChild(display);
     }
 
-
     /**
      * Redraw active slider
      * 
@@ -211,7 +211,6 @@ class Slider {
         this.updateLegendUI(currentAngle);
     }
 
-
     /**
      * Update legend UI
      * 
@@ -228,7 +227,6 @@ class Slider {
         targetLegend.innerText = currentValue;
     }
 
-
     /**
      * Mouse down / Touch start event
      * 
@@ -242,7 +240,6 @@ class Slider {
         this.redrawActiveSlider(rmc);
     }
 
-
     /**
      * Mouse move / touch move event
      * 
@@ -255,7 +252,6 @@ class Slider {
         this.redrawActiveSlider(rmc);
     }
 
-
     /**
      * Mouse move / touch move event
      * Deactivate slider
@@ -266,7 +262,6 @@ class Slider {
         this.mouseDown = false;
         this.activeSlider = null;
     }
-
 
     /**
      * Calculate number of arc fractions and space between them
@@ -282,7 +277,6 @@ class Slider {
         const totalSpacing = circumference - numFractions * arcBgFractionLength;
         return totalSpacing / numFractions;
     }
-  
 
     /**
      * Helper functiom - describe arc
@@ -321,7 +315,6 @@ class Slider {
 
         return path;
     }
-      
 
     /**
      * Helper function - polar to cartesian transformation
@@ -340,7 +333,6 @@ class Slider {
         return {x, y};
     }
 
-
     /**
      * Helper function - calculate handle center
      * 
@@ -355,7 +347,6 @@ class Slider {
         return {x, y};
     }
 
-
     /**
      * Get mouse coordinates relative to the top and left of the container
      *  
@@ -369,7 +360,6 @@ class Slider {
         const y = e.clientY - containerRect.top;
         return { x, y };
     }
-
 
     /**
      * Calculate mouse angle in radians
@@ -387,7 +377,6 @@ class Slider {
         }
     }
 
-
     /**
      * Helper function - transform radians to degrees
      * 
@@ -398,7 +387,6 @@ class Slider {
     radiansToDegrees(angle) {
         return angle / (Math.PI / 180);
     }
-
 
     /**
      * Find closest slider to mouse pointer
