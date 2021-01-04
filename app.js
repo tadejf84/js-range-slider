@@ -235,7 +235,7 @@ class Slider {
     mouseTouchStart(e) {
         if (this.mouseDown) return;
         this.mouseDown = true;
-        const rmc = this.getRelativeMouseCoordinates(e);
+        const rmc = this.getRelativeMouseOrTouchCoordinates(e);
         this.findClosestSlider(rmc);
         this.redrawActiveSlider(rmc);
     }
@@ -248,7 +248,7 @@ class Slider {
     mouseTouchMove(e) {
         if (!this.mouseDown) return;
         e.preventDefault();
-        const rmc = this.getRelativeMouseCoordinates(e);
+        const rmc = this.getRelativeMouseOrTouchCoordinates(e);
         this.redrawActiveSlider(rmc);
     }
 
@@ -290,10 +290,14 @@ class Slider {
      * @returns {string} path
      */
     describeArc (x, y, radius, startAngle, endAngle) {
-        let endAngleOriginal, start, end, arcSweep, path;
-        endAngleOriginal = endAngle;
+        let path,
+            endAngleOriginal = endAngle, 
+            start, 
+            end, 
+            arcSweep;
 
-        if(endAngleOriginal - startAngle === 360){
+        if(endAngleOriginal - startAngle === 360)
+        {
             endAngle = 359;
         }
 
@@ -301,12 +305,15 @@ class Slider {
         end = this.polarToCartesian(x, y, radius, startAngle);
         arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
 
-        if (endAngleOriginal - startAngle === 360) {
+        if (endAngleOriginal - startAngle === 360) 
+        {
             path = [
                 'M', start.x, start.y,
                 'A', radius, radius, 0, arcSweep, 0, end.x, end.y, 'z'
             ].join(' ');
-        } else {
+        } 
+        else 
+        {
             path = [
                 'M', start.x, start.y,
                 'A', radius, radius, 0, arcSweep, 0, end.x, end.y
@@ -330,7 +337,7 @@ class Slider {
         const angleInRadians = angleInDegrees * Math.PI / 180;
         const x = centerX + (radius * Math.cos(angleInRadians));
         const y = centerY + (radius * Math.sin(angleInRadians));
-        return {x, y};
+        return { x, y };
     }
 
     /**
@@ -344,20 +351,37 @@ class Slider {
     calculateHandleCenter (angle, radius) {
         const x = this.cx + Math.cos(angle) * radius;
         const y = this.cy + Math.sin(angle) * radius;
-        return {x, y};
+        return { x, y };
     }
 
     /**
-     * Get mouse coordinates relative to the top and left of the container
+     * Get mouse/touch coordinates relative to the top and left of the container
      *  
      * @param {object} e
      * 
      * @returns {object} coords
      */ 
-    getRelativeMouseCoordinates (e) {   
+    getRelativeMouseOrTouchCoordinates (e) {
         const containerRect = document.querySelector('.slider__data').getBoundingClientRect();
-        const x = e.clientX - containerRect.left;
-        const y = e.clientY - containerRect.top;
+        let x, y, clientPosX, clientPosY;
+ 
+        // Touch Event triggered
+        if (e instanceof TouchEvent) 
+        {
+            clientPosX = e.touches[0].pageX;
+            clientPosY = e.touches[0].pageY;
+        }
+        // Mouse Event Triggered
+        else 
+        {
+            clientPosX = e.clientX;
+            clientPosY = e.clientY;
+        }
+
+        // Get Relative Position
+        x = clientPosX - containerRect.left;
+        y = clientPosY - containerRect.top;
+
         return { x, y };
     }
 
@@ -370,9 +394,13 @@ class Slider {
      */
     calculateMouseAngle(rmc) {
         const angle = Math.atan2(rmc.y - this.cy, rmc.x - this.cx);
-        if (angle > - this.tau / 2 && angle < - this.tau / 4) {
+
+        if (angle > - this.tau / 2 && angle < - this.tau / 4) 
+        {
             return angle + this.tau * 1.25;
-        } else {
+        } 
+        else 
+        {
             return angle + this.tau * 0.25;
         }
     }
