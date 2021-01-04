@@ -43,3 +43,6 @@ slider.draw();
 ```
 
 That's it!
+
+## Special thanks to
+Sabine - for finding a bug in the calculation of the relative client coordinates and pointing it out!
