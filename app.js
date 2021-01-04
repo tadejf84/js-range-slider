@@ -77,7 +77,7 @@ class Slider {
         const circumference = slider.radius * this.tau;
 
         // Calculate initial angle
-        const initialAngle = Math.floor( (slider.initialValue / (slider.max - slider.min)) * 360 );
+        const initialAngle = Math.floor( ( slider.initialValue / (slider.max - slider.min) ) * 360 );
 
         // Calculate spacing between arc fractions
         const arcFractionSpacing = this.calculateSpacingBetweenArcFractions(circumference, this.arcFractionLength, this.arcFractionSpacing);
@@ -305,22 +305,17 @@ class Slider {
         end = this.polarToCartesian(x, y, radius, startAngle);
         arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
 
+        path = [
+            'M', start.x, start.y,
+            'A', radius, radius, 0, arcSweep, 0, end.x, end.y
+        ];
+
         if (endAngleOriginal - startAngle === 360) 
         {
-            path = [
-                'M', start.x, start.y,
-                'A', radius, radius, 0, arcSweep, 0, end.x, end.y, 'z'
-            ].join(' ');
+            path.push('z');
         } 
-        else 
-        {
-            path = [
-                'M', start.x, start.y,
-                'A', radius, radius, 0, arcSweep, 0, end.x, end.y
-            ].join(' ');
-        }
 
-        return path;
+        return path.join(' ');
     }
 
     /**
@@ -363,7 +358,10 @@ class Slider {
      */ 
     getRelativeMouseOrTouchCoordinates (e) {
         const containerRect = document.querySelector('.slider__data').getBoundingClientRect();
-        let x, y, clientPosX, clientPosY;
+        let x, 
+            y, 
+            clientPosX, 
+            clientPosY;
  
         // Touch Event triggered
         if (e instanceof TouchEvent) 
