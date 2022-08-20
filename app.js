@@ -364,7 +364,7 @@ class Slider {
             clientPosY;
  
         // Touch Event triggered
-        if (e instanceof TouchEvent) 
+        if (window.TouchEvent && e instanceof TouchEvent) 
         {
             clientPosX = e.touches[0].pageX;
             clientPosY = e.touches[0].pageY;
