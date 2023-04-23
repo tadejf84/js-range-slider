@@ -1,4 +1,4 @@
-# JavaScript Range Slider
+# JavaScript Concentric Range Slider
 
 This slider is built with vanilla JS. It's reusable, customizable and easy to use.
 
