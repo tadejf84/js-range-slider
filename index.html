@@ -34,7 +34,8 @@
                     step: 10,
                     initialValue: 50,
                     color: '#fdcb6e',
-                    displayName: 'Value 1'
+                    displayName: 'Value 1',
+                    drawLegend: true
                 },
                 {
                     radius: 160,
@@ -43,7 +44,8 @@
                     step: 100,
                     initialValue: 200,
                     color: '#0984e3',
-                    displayName: 'Value 2'
+                    displayName: 'Value 2',
+                    drawLegend: true
                 },
                 {
                     radius: 40,
@@ -52,7 +54,11 @@
                     step: 10,
                     initialValue: 20,
                     color: '#d63031',
-                    displayName: 'Value 3'
+                    displayName: 'Value 3',
+                    drawLegend: true,
+                    onchange: (value)=>{
+                        console.log("Value",value)
+                    }
                 }
             ]
         };
@@ -60,6 +66,9 @@
         // instantiate the slider
         const slider = new Slider(opts);
         slider.draw();
+        slider.on("change",function(value){
+            console.log(value)
+        })
     </script>
 </body>
 

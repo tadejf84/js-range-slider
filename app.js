@@ -21,10 +21,38 @@ class Slider {
         this.arcBgFractionColor = '#D8D8D8';                        // Arc fraction color for background slider
         this.handleFillColor = '#fff';                              // Slider handle fill color
         this.handleStrokeColor = '#888888';                         // Slider handle stroke color
-        this.handleStrokeThickness = 3;                             // Slider handle stroke thickness    
+        this.handleStrokeThickness = 1;                             // Slider handle stroke thickness    
         this.mouseDown = false;                                     // Is mouse down
         this.activeSlider = null;                                   // Stores active (selected) slider
+        this.events = {};                                           // Stores registered user events
+        this.lastValue = 0;                                         // Stores last value ( used for change event )
     }
+
+    /**
+     * Registers user events
+     * @param {string} evt 
+     * @param {function} callback
+     */
+    on(evt,callback){
+        // Set an empty array for the event if it doesn't exist
+        if( !this.events.hasOwnProperty(evt) ){
+            this.events[evt] = [];
+        }
+        // Store the callback in the array
+        this.events[evt].push(callback);
+    }
+
+    /**
+     * Emits a specific event to all registered listeners
+     * @param {string} evt 
+     * @param {any} data
+     */
+    emitEvent(evt,data){
+        if( this.events.hasOwnProperty(evt) ){
+            this.events[evt].forEach(callback => callback(data));
+        }
+    }
+    
 
     /**
      * Draw sliders on init
@@ -167,6 +195,9 @@ class Slider {
 
         // Legend data for all sliders
         this.sliders.forEach((slider, index) => {
+            if( !slider.drawLegend){
+                return;
+            }
             const li = document.createElement('li');
             li.setAttribute('data-slider', index);
             const firstSpan = document.createElement('span');
@@ -209,6 +240,29 @@ class Slider {
 
         // Update legend
         this.updateLegendUI(currentAngle);
+        this.serveCurrentValue(currentAngle);
+    }
+
+    /**
+     * Serve registered events
+     * 
+     * @param {number} currentAngle 
+     */
+    serveCurrentValue(currentAngle) {
+        const targetSlider = this.activeSlider.getAttribute('data-slider');
+        const currentSlider = this.sliders[targetSlider];
+        const currentSliderRange = currentSlider.max - currentSlider.min;
+        let currentValue = currentAngle / this.tau * currentSliderRange;
+        const numOfSteps =  Math.round(currentValue / currentSlider.step);
+        currentValue = currentSlider.min + numOfSteps * currentSlider.step;
+        // Emit the change event only when the value changed
+        if(this.lastValue !== currentValue){
+            this.lastValue = currentValue;
+            this.emitEvent("change",{value:currentValue,name:currentSlider.displayName});
+            if( currentSlider.onchange ){
+                currentSlider.onchange(currentValue);
+            }
+        }
     }
 
     /**
@@ -220,6 +274,7 @@ class Slider {
         const targetSlider = this.activeSlider.getAttribute('data-slider');
         const targetLegend = document.querySelector(`li[data-slider="${targetSlider}"] .sliderValue`);
         const currentSlider = this.sliders[targetSlider];
+        if( !currentSlider.drawLegend ){ return; }
         const currentSliderRange = currentSlider.max - currentSlider.min;
         let currentValue = currentAngle / this.tau * currentSliderRange;
         const numOfSteps =  Math.round(currentValue / currentSlider.step);
