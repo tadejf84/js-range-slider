@@ -259,6 +259,9 @@ class Slider {
         if(this.lastValue !== currentValue){
             this.lastValue = currentValue;
             this.emitEvent("change",{value:currentValue,name:currentSlider.displayName});
+            if( currentSlider.onchange ){
+                currentSlider.onchange(currentValue);
+            }
         }
     }
 

@@ -53,5 +53,45 @@ slider.draw();
 
 That's it!
 
+## Event register
+You can register an event handler for value change globally or to each slider.
+
+```javascript
+/*
+  Data structure
+   {
+        "value":  valueOf_TheSlider,
+        "name": nameOf_TheSlider
+    }
+*/
+slider.on("change",function(data){
+    // Do something with the data
+    console.log(data)
+})
+```
+
+Or you can register an onChange method for only specific sliders
+
+```javascript
+const opts = {
+  DOMselector: '#app',
+  sliders: [
+    {
+        radius: 40,
+        min: 0,
+        max: 200,
+        step: 10,
+        initialValue: 20,
+        color: '#d63031',
+        displayName: 'Value 3',
+        drawLegend: true,
+        onchange: (value)=>{
+            console.log("Value",value)
+        }
+    }
+  ]
+}
+```
+
 ## Special thanks to
 Sabine - for finding a bug in the calculation of the relative client coordinates and pointing it out!
